@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: app-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: backend_api
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  redis:
+    image: redis:7.2
+    container_name: app-redis
+    restart: always
+    command: redis-server --requirepass rahasia123
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  backend:
+    build: ./backend
+    container_name: app-backend
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: mysql://root:root123@mysql:3306/backend_api
+      REDIS_URL: redis://default:rahasia123@redis:6379
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ./backend:/app
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: app-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+    restart: always
+
+volumes:
+  mysql-data:
+  redis-data:
