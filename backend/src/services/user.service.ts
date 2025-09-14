@@ -279,6 +279,15 @@ export async function deleteUserService(
   };
 }
 
+
+type User = {
+  id: number;
+  username: string;
+  name: string;
+  role: string;
+  createdAt: Date;
+};
+
 export async function exportUserCSVService(rawQuery: any) {
   const result = getUserListSchema.safeParse(rawQuery);
   if (!result.success) {
@@ -288,7 +297,7 @@ export async function exportUserCSVService(rawQuery: any) {
   const query = result.data;
   const { users } = await getListUserFromDB(query);
 
-  const records = users.map((user) => ({
+  const records = users.map((user: User) => ({
     id: user.id,
     username: user.username,
     name: user.name,
