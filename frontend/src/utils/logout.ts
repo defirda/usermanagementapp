@@ -31,7 +31,7 @@ export const logout = async (): Promise<boolean> => {
       return false;
     }
   } catch (err: unknown) {
-    console.error('Logout error');
+    console.error('Logout error:', err.response?.data?.message || err.message);
     return false;
   }
 };
