@@ -11,13 +11,6 @@ type Params = {
   sortDir?: 'asc' | 'desc';
 };
 
-type User = {
-  id: string;
-  name: string;
-  role: string;
-  // tambahkan properti lain sesuai kebutuhan
-};
-
 export const fetchUsers = async ({
   token,
   role,
@@ -43,7 +36,7 @@ export const fetchUsers = async ({
     });
 
     const { data: responseData } = res.data;
-    const data = role === 'admin' ? responseData.data : [responseData.data.find((u: User) => u.role === role)];
+    const data = role === 'admin' ? responseData.data : [responseData.data.find((u: any) => u.role === role)];
     return {
       users: data,
       totalPages: responseData.metadata.totalPage || 1,
