@@ -27,7 +27,7 @@ Request ID middleware adds X-Request-Id to every response for traceability.
 ## 🚀 Setup UP With Docker
 - git clone https://github.com/defirda/usermanagementapp.git
 - cd usermanagementapp
-- run docker-compose up --build -d
+- run docker-compose up -d
 
 
 ## User Login
