@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:18-alpine
 
 # 1. Set working directory
 WORKDIR /app
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # 6. Copy env file (hati-hati: jangan lakukan ini di production!)
-RUN cp .env.example .env
+# RUN cp .env.example .env
 
 # 7. Generate Prisma client
 RUN npx prisma generate
