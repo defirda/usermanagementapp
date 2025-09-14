@@ -34,8 +34,6 @@ services:
     depends_on:
       - mysql
       - redis
-    volumes:
-      - ./backend:/app
     restart: always
 
   frontend:
@@ -44,11 +42,9 @@ services:
     ports:
       - "3001:3001"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:3001
+      NEXT_PUBLIC_API_URL: http://backend:3000
     depends_on:
       - backend
-    volumes:
-      - ./frontend:/app
     restart: always
 
 volumes:

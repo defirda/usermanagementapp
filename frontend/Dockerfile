@@ -1,16 +1,26 @@
-# Stage 1: Build stage
-FROM node:18-alpine AS builder
+# Gunakan Node.js 24 dengan Alpine Linux sebagai base image
+FROM node:18-alpine
+
+# Set working directory di dalam container
 WORKDIR /app
+
+# Copy package.json dan package-lock.json (jika ada)
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
+
+# Copy seluruh source code ke dalam container
 COPY . .
+
+# Build aplikasi Next.js untuk production
 RUN npm run build
 
-# Stage 2: Production stage
-FROM node:18-alpine AS runner
-WORKDIR /app
-COPY package*.json ./
-RUN npm install --only=production
-COPY --from=builder /app/.next ./.next
-EXPOSE 3001
+# Expose port 3000 (port default Next.js)
+EXPOSE 3000
+
+# Set environment variable untuk production
+ENV NODE_ENV=production
+
+# Jalankan aplikasi
 CMD ["npm", "start"]
