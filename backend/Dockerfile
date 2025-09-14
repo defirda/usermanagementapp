@@ -8,9 +8,11 @@ COPY package*.json ./
 
 # 3. Install dependencies
 RUN npm install
+RUN npm install prisma @prisma/client
 
 # 4. Copy semua source code
 COPY . .
+COPY prisma ./prisma
 
 # 5. Build TypeScript
 RUN npm run build
