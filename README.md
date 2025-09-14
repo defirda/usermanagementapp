@@ -29,6 +29,8 @@ Request ID middleware adds X-Request-Id to every response for traceability.
 - cd usermanagementapp
 - run docker-compose up -d
 
+## API Documentation
+http://localhost:3000/api-docs/
 
 ## User Login
 - cari username di mysql table users, gunakan username dan passwordnya adalah password123
