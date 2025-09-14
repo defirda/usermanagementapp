@@ -12,7 +12,7 @@ import pinoHttp from 'pino-http';
 import { rateLimiter } from './middlewares/rateLimiter.middleware';
 import { errorHandler } from './middlewares/errorHandler.middleware';
 
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 
