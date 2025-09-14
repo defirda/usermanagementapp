@@ -30,5 +30,9 @@ Request ID middleware adds X-Request-Id to every response for traceability.
 - run docker-compose up --build -d
 
 
+## User Login
+- cari username di mysql table users, gunakan username dan passwordnya adalah password123
+
+
 👤 Author
 Made with ❤️ by Muhammad Ade Firdaus
