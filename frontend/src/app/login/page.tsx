@@ -36,8 +36,8 @@ export default function LoginPage() {
 
         // Redirect ke halaman utama
         router.push('/users');
-    } catch (err: any) {
-      console.error('Login gagal:', err.response?.data?.message || err.message);
+    } catch (err: unknown) {
+      console.error('Login gagal');
     }
   };
 

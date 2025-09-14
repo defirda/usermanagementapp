@@ -30,8 +30,8 @@ export const logout = async (): Promise<boolean> => {
       console.warn('Logout gagal: status tidak 200');
       return false;
     }
-  } catch (err: any) {
-    console.error('Logout error:', err.response?.data?.message || err.message);
+  } catch (err: unknown) {
+    console.error('Logout error');
     return false;
   }
 };

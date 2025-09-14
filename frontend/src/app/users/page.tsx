@@ -53,7 +53,7 @@ export default function UsersPage() {
     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
     const [passwordUserId, setPasswordUserId] = useState(null);
 
-    const openPasswordModal = (id : any) => {
+    const openPasswordModal = (id : number) => {
     setPasswordUserId(id);
     setIsPasswordModalOpen(true);
     };
