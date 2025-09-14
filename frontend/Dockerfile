@@ -1,22 +1,15 @@
-FROM node:18-alpine
-
-# Set working directory
+# Stage 1: Build stage
+FROM node:18-alpine AS builder
 WORKDIR /app
-
-# Salin file dependency dulu (biar cache efisien)
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Salin semua source code
 COPY . .
-
-# Build project (Next.js akan generate folder .next)
 RUN npm run build
 
-# Expose port (Next.js default: 3000, bukan 3001)
-EXPOSE 3001
-
-# Jalankan server
-CMD ["npm", "run", "start"]
+# Stage 2: Production stage
+FROM node:24-alpine AS runner
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --only=production
+COPY --from=builder /app/.next ./.next
+CMD ["npm", "start"]
