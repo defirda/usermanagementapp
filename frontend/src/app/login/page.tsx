@@ -37,8 +37,18 @@ export default function LoginPage() {
         // Redirect ke halaman utama
         router.push('/users');
     } catch (err: unknown) {
-      console.error('Login gagal:', err.response?.data?.message || err.message);
+    if (err instanceof Error) {
+      // Kalau error dari Axios, bisa cek apakah ada response
+      const axiosErr = err as any;
+      const message =
+        axiosErr?.response?.data?.message || err.message || 'Unknown error';
+      console.error('Logout error:', message);
+    } else {
+      console.error('Logout error: Unknown error type', err);
     }
+  return false;
+}
+
   };
 
   return (
