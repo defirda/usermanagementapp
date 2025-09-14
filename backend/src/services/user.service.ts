@@ -20,6 +20,14 @@ import {
 import { logAudit } from '../repositories/audit.repo';
 import bcrypt from 'bcryptjs';
 
+interface UserPreview {
+  id: number;
+  username: string;
+  name: string | null;
+  role: string;
+  createdAt: Date;
+}
+
 export async function getListUserService(rawQuery: any) {
   const TTL = 60;
   const result = getUserListSchema.safeParse(rawQuery);
@@ -288,7 +296,7 @@ export async function exportUserCSVService(rawQuery: any) {
   const query = result.data;
   const { users } = await getListUserFromDB(query);
 
-  const records = users.map((user) => ({
+  const records = users.map((user: UserPreview) => ({
     id: user.id,
     username: user.username,
     name: user.name,
